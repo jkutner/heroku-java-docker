@@ -28,3 +28,14 @@ of process type to the `run` command like this:
 ```
 $ docker run -it -v `pwd`:/app:ro --rm heroku/java worker
 ```
+
+## Build the image with only one JDK
+
+By default, the image will install JDK 6, 7, and 8 (and then decided which one
+  to use based on your application's settings). But if you know you will only
+  need one version of the JDK, you can define it in a `system.properties` in the
+  root directory of this project. For example, the file might contain:
+
+```
+java.runtime.version=1.7
+```

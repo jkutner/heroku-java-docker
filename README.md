@@ -11,7 +11,9 @@ Build the Heroku cedar-14 image:
 ./build.sh
 ```
 
-The from your application directory run this to start a container:
+This will build a Docker image with the tag "heroku/java".
+
+Then, from your application directory run this to start a container:
 
 ```
 $ docker run --publish 8080:8080 -it -v `pwd`:/app:ro --rm heroku/java

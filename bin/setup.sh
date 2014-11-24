@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
 
-BUILD_DIR=${1-$(pwd)}
+herokuDir=${1-$(pwd)}
 
 JVM_COMMON_BUILDPACK=http://lang-jvm.s3.amazonaws.com/jvm-buildpack-common-v8.tar.gz
-mkdir -p /tmp/jvm-common
-curl --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-common
-. /tmp/jvm-common/bin/util
-. /tmp/jvm-common/bin/java
+mkdir -p ${herokuDir}/jvm-common
+curl --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C ${herokuDir}/jvm-common
+. ${herokuDir}/jvm-common/bin/util
+. ${herokuDir}/jvm-common/bin/java
 
-# install JDK
-javaVersion=${2:-$(detect_java_version ${BUILD_DIR})}
-echo -n " ---> Installing OpenJDK ${javaVersion}..."
-install_java ${BUILD_DIR} ${javaVersion}
-echo " done"
+if [ -f $herokuDir/system.properties ]; then
+  javaVersion=$(detect_java_version ${herokuDir})
+  echo -n " ---> Installing OpenJDK ${javaVersion}..."
+  install_java ${herokuDir}/jdk${javaVersion} ${javaVersion}
+  echo " done"
+else
+  for javaVersion in "1.6" "1.7" "1.8"; do
+    mkdir -p ${herokuDir}/jdk${javaVersion}
+    echo -n " ---> Installing OpenJDK ${javaVersion}..."
+    install_java ${herokuDir}/jdk${javaVersion} ${javaVersion}
+    echo " done"
+  done
+fi

@@ -13,7 +13,7 @@ Build the Heroku cedar-14 image:
 The from your application directory run this to start a container:
 
 ```
-$ docker run --publish 8080:8080 -t -v `pwd`:/app:ro --rm heroku/java
+$ docker run --publish 8080:8080 -it -v `pwd`:/app:ro --rm heroku/java
 ```
 
 The command above will detect your project's `Procfile` and run the `web` process.
@@ -26,5 +26,5 @@ To run process types (in your `Procfile`) other than `web`, just add the name
 of process type to the `run` command like this:
 
 ```
-$ docker run -t -v `pwd`:/app:ro --rm heroku/java worker
+$ docker run -it -v `pwd`:/app:ro --rm heroku/java worker
 ```

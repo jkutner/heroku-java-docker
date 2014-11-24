@@ -1,6 +1,7 @@
 # Heroku Java Docker Image
 
 This Docker project is used to test Java applications on [Heroku's cedar-14 stack](https://devcenter.heroku.com/articles/cedar).
+It can be used to run any kind of Java-based application (Java, Scala, Groovy, etc), regardless of the Buildpack used on Heroku.
 
 ## Usage
 

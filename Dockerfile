@@ -7,11 +7,11 @@ ADD *   /opt/heroku/
 ADD bin /opt/heroku/bin
 
 RUN /opt/heroku/bin/setup.sh /opt/heroku
+RUN gem install --no-rdoc --no-ri foreman
 
 ENV PATH /opt/heroku/.jdk/bin:$PATH
-ENV PORT 8080
 
-EXPOSE 8080
+EXPOSE 5000
 
 WORKDIR /app
 

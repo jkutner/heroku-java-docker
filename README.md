@@ -16,12 +16,12 @@ This will build a Docker image with the tag "heroku/java".
 Then, from your application directory run this to start a container:
 
 ```
-$ docker run --publish 8080:8080 -it -v `pwd`:/app:ro --rm heroku/java
+$ docker run --publish 5000:5000 -it -v `pwd`:/app --rm heroku/java
 ```
 
 The command above will detect your project's `Procfile` and run the `web` process.
 
-Browse to `http://localhost:8080` in you are on Linux, or `http://boot2docker-ip:8080` on Mac.
+Browse to `http://localhost:5000` in you are on Linux, or `http://boot2docker-ip:5000` on Mac.
 
 ## Running Other Process Types
 
@@ -29,7 +29,7 @@ To run process types (in your `Procfile`) other than `web`, just add the name
 of process type to the `run` command like this:
 
 ```
-$ docker run -it -v `pwd`:/app:ro --rm heroku/java worker
+$ docker run -it -v `pwd`:/app --rm heroku/java worker
 ```
 
 ## Build the image with only one JDK
